@@ -11,8 +11,11 @@ const JobListings = ({isHome = false }) => {
   // !!empty array even if you dont have any variables to watch, cuz it will run on a loop 
   useEffect(() =>{
    const fetchJobs = async () => {
+    const apiUrl = isHome 
+    ? '/api/jobs?_limit=3' 
+    : '/api/jobs';
     try {
-      const res = await fetch('http://localhost:5000/jobs');
+      const res = await fetch(apiUrl);
       const data = await res.json();
       setJobs(data);
     }catch (error) {
